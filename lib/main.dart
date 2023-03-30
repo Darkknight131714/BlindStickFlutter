@@ -6,12 +6,16 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hi/home.dart';
+import 'package:hi/location.dart';
 import 'package:hi/voice_trial.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -97,6 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future connect() async {
     var status = await Permission.bluetooth.status;
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Attempting to connect to HC-05....")));
     print(status);
     if (status.isDenied) {
       await Permission.bluetooth.request();
@@ -134,6 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Connect"),
               onPressed: () async {
                 await connect();
+              },
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              child: Text("Location Screen"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return LocationScreen();
+                }));
               },
             ),
           ),

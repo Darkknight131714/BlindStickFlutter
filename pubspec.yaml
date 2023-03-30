@@ -39,6 +39,13 @@ dependencies:
   permission_handler: ^10.2.0
   assets_audio_player: ^3.0.6
   speech_to_text: ^6.1.1
+  geolocator: ^9.0.2
+  sensors_plus: ^2.0.2
+  firebase_storage: ^11.1.0
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.0
+  cloud_firestore: ^4.5.0
+  firebase_messaging: ^14.4.0
 
 dev_dependencies:
   flutter_test:

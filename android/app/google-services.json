@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "86267098516",
+    "project_id": "blindstick-5e496",
+    "storage_bucket": "blindstick-5e496.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86267098516:android:a99106f65bd6325fdc4b81",
+        "android_client_info": {
+          "package_name": "com.example.hi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86267098516-75dfo7d1n04hrhdtt5917vs34h4drmcl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC43JzqnH1qEPCJGZNAYDKyabqpRRI1XM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86267098516-75dfo7d1n04hrhdtt5917vs34h4drmcl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
