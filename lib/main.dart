@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:hi/graph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hi/home.dart';
@@ -77,7 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startListening() async {
-    print("Hey");
     await _speechToText.listen(onResult: _onSpeechResult);
     setState(() {});
   }
@@ -147,8 +146,20 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ElevatedButton(
               child: Text("Location Screen"),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (_) {
                   return LocationScreen();
+                }));
+              },
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              child: Text("Create Graph"),
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (_) {
+                  return MyGraph();
                 }));
               },
             ),

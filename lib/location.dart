@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'main.dart';
+
 double calculateDistance(lat1, lon1, lat2, lon2) {
   var p = 0.017453292519943295;
   var c = cos;
@@ -64,16 +66,20 @@ class _LocationScreenState extends State<LocationScreen> {
       }
       GeoPoint last = GeoPoint(_prev.latitude, _prev.longitude);
       GeoPoint now = GeoPoint(_position.latitude, _position.longitude);
-      double lat = _position.latitude * 10000;
-      double long = _position.longitude * 10000;
+      double lat = _position.latitude * 100000;
+      double long = _position.longitude * 100000;
       int iLat = lat.round();
       int iLong = long.round();
       String currName = iLat.toString() + "_" + iLong.toString();
-      double prevLat = _prev.latitude * 10000;
-      double prevLong = _prev.longitude * 10000;
+      double prevLat = _prev.latitude * 100000;
+      double prevLong = _prev.longitude * 100000;
       int pLat = prevLat.round();
       int pLong = prevLong.round();
       String prevName = pLat.toString() + "_" + pLong.toString();
+      if (prevName == currName) {
+        print("BYE");
+        return;
+      }
       double dist = calculateDistance(_prev.latitude, _prev.longitude,
           _position.latitude, _position.longitude);
       CollectionReference points =
@@ -281,6 +287,17 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Bonjour"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) {
+                return MyHomePage();
+              }));
+            },
+            icon: Icon(Icons.home),
+          )
+        ],
       ),
       body: Column(
         children: [

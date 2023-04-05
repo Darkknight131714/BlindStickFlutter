@@ -8,6 +8,8 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
+import 'main.dart';
+
 class Home extends StatefulWidget {
   BluetoothConnection connection;
 
@@ -71,6 +73,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (_) {
+                return MyHomePage();
+              }));
+            },
+            icon: Icon(Icons.home),
+          )
+        ],
       ),
       body: Center(
         child: Text(current),
