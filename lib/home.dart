@@ -42,22 +42,24 @@ class _HomeState extends State<Home> {
         t.playlist!.audios.clear();
       }
       t.stop();
-      if (current == "P") {
-        t.open(Audio("assets/P.m4a"), showNotification: false);
-        t.play();
-      } else if (current == "F") {
-        t.open(Audio("assets/F.m4a"), showNotification: false);
-        t.play();
-      } else if (current == "L") {
-        t.open(Audio("assets/L.m4a"), showNotification: false);
-        t.play();
-      } else if (current == "R") {
-        t.open(Audio("assets/R.m4a"), showNotification: false);
-        t.play();
-      } else if (current == "E") {
-        t.open(Audio("assets/E.m4a"), showNotification: false);
-        t.play();
-      }
+      t.open(Audio("assets/${current}.mp3"), showNotification: false);
+      t.play();
+      // if (current == "P") {
+      //   t.open(Audio("assets/P.mp3"), showNotification: false);
+      //   t.play();
+      // } else if (current == "F") {
+      //   t.open(Audio("assets/F.mp3"), showNotification: false);
+      //   t.play();
+      // } else if (current == "L") {
+      //   t.open(Audio("assets/L.m4a"), showNotification: false);
+      //   t.play();
+      // } else if (current == "R") {
+      //   t.open(Audio("assets/R.m4a"), showNotification: false);
+      //   t.play();
+      // } else if (current == "E") {
+      //   t.open(Audio("assets/E.m4a"), showNotification: false);
+      //   t.play();
+      // }
     });
   }
 

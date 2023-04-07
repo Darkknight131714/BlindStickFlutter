@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:hi/graph.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -67,7 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void _initSpeech() async {
     await Permission.microphone.request();
     _speechEnabled = await _speechToText.initialize();
-
     setState(() {});
     t = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_speechToText.isNotListening) {
