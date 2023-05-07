@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:hi/home.dart';
 import 'package:hi/location.dart';
+import 'package:hi/new_trial.dart';
 import 'package:hi/voice_trial.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -28,8 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        colorScheme:
+            ThemeData.dark().colorScheme.copyWith(primary: Colors.orange),
       ),
       home: MyHomePage(),
     );
@@ -44,6 +47,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var player = AssetsAudioPlayer.newPlayer();
   late BluetoothConnection connection;
   late Timer t;
   bool cond = true;
@@ -129,11 +133,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Bonjour"),
-      ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 35.0),
+            child: Center(
+              child: Image.asset('assets/logo.png'),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
           Center(
             child: ElevatedButton(
               child: Text("Connect"),
@@ -142,28 +152,28 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          Center(
-            child: ElevatedButton(
-              child: Text("Location Screen"),
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) {
-                  return LocationScreen();
-                }));
-              },
-            ),
-          ),
-          Center(
-            child: ElevatedButton(
-              child: Text("Create Graph"),
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) {
-                  return MyGraph();
-                }));
-              },
-            ),
-          ),
+          // Center(
+          //   child: ElevatedButton(
+          //     child: Text("Location Screen"),
+          //     onPressed: () {
+          //       Navigator.pushReplacement(context,
+          //           MaterialPageRoute(builder: (_) {
+          //         return LocationScreen();
+          //       }));
+          //     },
+          //   ),
+          // ),
+          // Center(
+          //   child: ElevatedButton(
+          //     child: Text("Create Graph"),
+          //     onPressed: () {
+          //       Navigator.pushReplacement(context,
+          //           MaterialPageRoute(builder: (_) {
+          //         return MyGraph();
+          //       }));
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );

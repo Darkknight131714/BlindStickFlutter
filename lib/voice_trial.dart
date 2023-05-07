@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:telephony/telephony.dart';
 
 class VoiceTrial extends StatefulWidget {
   const VoiceTrial({super.key});
@@ -14,6 +17,7 @@ class _VoiceTrialState extends State<VoiceTrial> {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
+  late Timer t;
 
   @override
   void initState() {
@@ -26,8 +30,11 @@ class _VoiceTrialState extends State<VoiceTrial> {
   void _initSpeech() async {
     await Permission.microphone.request();
     _speechEnabled = await _speechToText.initialize();
-
-    setState(() {});
+    t = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_speechToText.isNotListening) {
+        _startListening();
+      }
+    });
   }
 
   void _startListening() async {
@@ -42,10 +49,28 @@ class _VoiceTrialState extends State<VoiceTrial> {
 
   /// This is the callback that the SpeechToText plugin calls when
   /// the platform returns recognized words.
-  void _onSpeechResult(SpeechRecognitionResult result) {
+  void _onSpeechResult(SpeechRecognitionResult result) async {
     setState(() {
       _lastWords = result.recognizedWords;
     });
+    print("Hey");
+    List<String> re = _lastWords.split(' ');
+    if (re.length == 1 && re[0].toLowerCase() == 'emerge') {
+      final Telephony telephony = Telephony.instance;
+      bool? permissionsGranted = await telephony.requestPhoneAndSmsPermissions;
+      if (permissionsGranted! == false) {
+        return;
+      }
+      telephony.sendSms(
+          to: "9521424328", message: "May the force be with you!");
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    t.cancel();
   }
 
   @override
